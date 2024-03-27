@@ -19,8 +19,8 @@ import { Loading } from "../../Loading";
 
 export function Login() {
   const [loginData, setLoginData] = useState({
-    email: "rk@gmail.com",
-    password: "1234567890",
+    email: "",
+    password: "",
   });
 
   const dispatch = useDispatch();
