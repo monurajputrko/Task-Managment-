@@ -17,14 +17,15 @@ import { useLocalStorage } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  getData,
   getDataTodos,
+  postTodo,
 } from "../../Redux/TodoReducer/action";
 import TodoCard from "./TodoCard";
 import usePostTodo from "../Assets/Custom";
 
 export default function Main() {
   const [opened, setOpened] = useState(false);
-  const { postTodo, loading, error } = usePostTodo();
   const [TodoData, setTodoData] = useState({
     title: "",
     description: "",
@@ -43,7 +44,7 @@ export default function Main() {
 
   useEffect(() => {
     dispatch(getDataTodos());
-  }, [dispatch,TodoData]);
+  }, [dispatch]);
 
   const navigate = useNavigate();
   const isAutheticated = useSelector((store) => store.authReducer.success);
@@ -56,13 +57,19 @@ export default function Main() {
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
-  const handleAddTodo = async () => {  
-    if (TodoData.title !== "" && TodoData.description !== "") {
-      const result = await postTodo(TodoData);
-      setOpened(false);
-    }
-  };
   
+  
+  const createTask = (e) => {
+    // e.preventDefault();
+    if (TodoData.title !== "" && TodoData.description !== "") {
+      dispatch(postTodo(TodoData));
+      setOpened(false);
+      dispatch(getDataTodos());
+    } else {
+      alert("All Fields are required");
+    }
+    
+  };
 
   return (
     <ColorSchemeProvider
@@ -117,7 +124,7 @@ export default function Main() {
               </Button>
               <Button
                 onClick={() => {
-                  handleAddTodo();
+                  createTask();
                 }}
               >
                 Create Task
