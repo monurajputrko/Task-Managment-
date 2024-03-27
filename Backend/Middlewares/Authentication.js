@@ -9,7 +9,7 @@ const authentication = (req, res, next) => {
   } else {
     jwt.verify(token, "green", function (err, decode) {
       if (err) {
-        res.send("login first");
+        res.send("log in first");
       } else {
         const { userID } = decode;
         req.userID = userID;
