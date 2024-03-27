@@ -1,6 +1,14 @@
 # Green Mentor Task Management
 A React Todo app manages tasks with features like adding, deleting, and marking tasks as complete. It uses React's component-based architecture for reusable UI elements and state management for dynamic updates. The app provides a simple interface for users to organize and track their to-dos efficiently.
 
+```bash
+    https://task-managment-two.vercel.app/
+    ```
+
+```bash
+   https://green-mentor-h5c2.onrender.com
+    ```
+
 ## Setup
 
 1. **Clone the repository:**
