@@ -155,8 +155,31 @@ app.post("/todoadd", authentication, async (req, res) => {
   }
 });
 
-app.put("/todo/:todoId", authentication, async (req, res) => {
+app.put("/todo/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, description, status } = req.body;
+
   try {
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id,
+      { title, description, status },
+      { new: true }
+    );
+
+    if (!updatedTodo) {
+      return res.status(404).json({ msg: "Todo not found" });
+    }
+
+    res.status(200).json({ todo: updatedTodo });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+
+// app.put("/todo/:todoId", authentication, async (req, res) => {
+//   try {
     // const update = await TodoModel.findByIdAndUpdate(
     //     req.params.todoId,
     //     req.body,
@@ -168,17 +191,17 @@ app.put("/todo/:todoId", authentication, async (req, res) => {
     //     console.log("Failed to update");
     //     res.status(404).send("Failed to update");
     // }
-    const { title, body } = req.body;
-    const list = await Todo.findByIdAndUpdate(req.params.id, {
-      title,
-      body,
-    });
-    list.save().then(() => res.status(200).json({ message: "Task Updated" }));
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: "Bad Request" });
-  }
-});
+//     const { title, body } = req.body;
+//     const list = await Todo.findByIdAndUpdate(req.params.id, {
+//       title,
+//       body,
+//     });
+//     list.save().then(() => res.status(200).json({ message: "Task Updated" }));
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ message: "Bad Request" });
+//   }
+// });
 
 // DELETE /products/:productID endpoint part
 app.delete("/todo/:todoId", authentication, async (req, res) => {
