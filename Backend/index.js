@@ -72,37 +72,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// app.get("/user", async (req, res) => {
-//   try {
-//     const data = await User.find();
-//     res.send(data);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send({ msg: "Internal Server Error" });
-//   }
-// });
 
 // *****************************************Todo here ************************************************
 
-// app.get("/todo", async (req, res) => {
-//     const { id } = req.body;
-//   try {
-//     // const data = await Todo.find();
-//     // console.log(data.title);
-//       // res.send(data);
-//        const todolist = await Todo.find().sort({
-//          user: "66032d2cd08dd656bd1e5ec6",
-//        });
-//        if (todolist.length !== 0) {
-//          res.status(200).json({ todolist: todolist });
-//        }
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send({ msg: "Internal Server Error" });
-//   }
-// });
 app.get("/todo", async (req, res) => {
-//   const { userId } = req.query; // Assuming userId is passed as a query parameter, e.g., /todo?userId=66032d2cd08dd656bd1e5ec6
     try {
        const token = req.headers.authorization?.split(" ")[1];
        const decodedToken = jwt.verify(token, "green");
@@ -123,13 +96,6 @@ app.get("/todo", async (req, res) => {
 app.post("/todoadd", authentication, async (req, res) => {
   const { title, description, status } = req.body;
   try {
-    // const data = await TodoModel.create({
-    //   title,
-    //   description,
-    //   status,
-    // });
-    // res.send(data);
-    // const { title, body } = req.body;
     const token = req.headers.authorization?.split(" ")[1];
     const decodedToken = jwt.verify(token, "green");
     const userId = decodedToken.userID;
@@ -177,31 +143,6 @@ app.put("/todo/:id",authentication,async (req, res) => {
 });
 
 
-// app.put("/todo/:todoId", authentication, async (req, res) => {
-//   try {
-    // const update = await TodoModel.findByIdAndUpdate(
-    //     req.params.todoId,
-    //     req.body,
-    //     { new: true, runValidators: true } // Ensure 'new: true' to return the updated document
-    // );
-    // if (update) {
-    //     res.status(200).send("Updated successfully: " + update);
-    // } else {
-    //     console.log("Failed to update");
-    //     res.status(404).send("Failed to update");
-    // }
-//     const { title, body } = req.body;
-//     const list = await Todo.findByIdAndUpdate(req.params.id, {
-//       title,
-//       body,
-//     });
-//     list.save().then(() => res.status(200).json({ message: "Task Updated" }));
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({ message: "Bad Request" });
-//   }
-// });
-
 // DELETE /products/:productID endpoint part
 app.delete("/todo/:id",authentication, async (req, res) => {
   const { id } = req.params;
@@ -220,22 +161,6 @@ app.delete("/todo/:id",authentication, async (req, res) => {
   }
 });
 
-// app.delete("/todo/:todoId", authentication, async (req, res) => {
-//   try {
-//     const { id } = req.body;
-//     const existingUser = await User.findByIdAndUpdate(id, {
-//       $pull: { list: req.params.id },
-//     });
-//     if (existingUser) {
-//       await List.findByIdAndDelete(req.params.id).then(() =>
-//         res.status(200).json({ message: "Task Deleted" })
-//       );
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({ msg: "Internal Server Error" });
-//   }
-// });
 
 const port = 8080;
 app.listen(port, async () => {
