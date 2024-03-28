@@ -22,13 +22,9 @@ import {
   postTodo,
 } from "../../Redux/TodoReducer/action";
 import TodoCard from "./TodoCard";
-import usePostTodo from "../Assets/Custom";
-import { Loading } from './../../Loading';
 
 export default function Main() {
   const [opened, setOpened] = useState(false);
-  const [LoadingState, setLoading] = useState(false);
-  const [time, setTime] = useState(0);
   const [TodoData, setTodoData] = useState({
     title: "",
     description: "",
@@ -38,7 +34,7 @@ export default function Main() {
   const dispatch = useDispatch();
   const mdata = useSelector((store) => store) || [];
   const tasks = mdata?.todosReducer?.todos?.todolist || [];
-  console.log(mdata.todosReducer);
+  // console.log(mdata.todosReducer);
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "mantine-color-scheme",
     defaultValue: "light",
