@@ -12,7 +12,7 @@ const initialState = {
 
 // Reducer
 export const todosReducer = (state = initialState, { type, payload }) => {
-  // console.log(payload);
+  
   switch (type) {
     case GET_TODO_REQUEST: {
       return {
@@ -61,3 +61,5 @@ export const todosReducer = (state = initialState, { type, payload }) => {
     }
   }
 };
+
+console.log(initialState.todos);
