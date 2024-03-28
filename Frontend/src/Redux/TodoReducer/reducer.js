@@ -1,3 +1,4 @@
+import { LOGIN_FAILURE } from "../AuthReducer/actionType";
 import { GET_TODO_FAILURE, GET_TODO_REQUEST, GET_TODO_SUCCESS, POST_TODO_FAILURE, POST_TODO_SUCCESS } from "./actionTypes";
 
 
@@ -34,14 +35,6 @@ export const todosReducer = (state = initialState, { type, payload }) => {
       };
     }
 
-    // case POST_TODO_SUCCESS:
-    //   return {
-    //     ...state,
-    //     todos: payload,
-    //     loading: false,
-    //     error: null,
-    //     success: true,
-    //   };
     case POST_TODO_SUCCESS:
       return {
         ...state,
@@ -50,7 +43,11 @@ export const todosReducer = (state = initialState, { type, payload }) => {
         error: null,
         success: true,
       };
-
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        todos: [],
+      }
     case POST_TODO_FAILURE:
       return {
         ...state,
