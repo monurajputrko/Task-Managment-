@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+require("dotenv").config
 
 const connection = async () => {
   try {
-    const mongoURI = "mongodb+srv://monurajputrko:monurajputrko@portfolio-generator.d2hnuek.mongodb.net/Green-Mentor?retryWrites=true&w=majority";
+    const mongoURI = `${process.env.MONGODB_URL}`;
     await mongoose.connect(mongoURI);
     console.log("MongoDB connected successfully.");
   } catch (err) {
