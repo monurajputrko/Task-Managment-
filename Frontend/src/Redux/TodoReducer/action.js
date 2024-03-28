@@ -81,7 +81,7 @@ export const postTodo = (newTodo) => {
       await dispatch(getDataTodos());  
       Swal.fire({
         title: "Great",
-        text: "Task Added Successfully",
+        text: "Task Added Successfully but it may take time to load Task on Ui because of free plan. please wait.",
         icon: "success",
       });
     } catch (error) {
