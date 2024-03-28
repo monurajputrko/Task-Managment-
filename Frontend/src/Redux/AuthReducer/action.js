@@ -1,5 +1,6 @@
 import axios from "axios";
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionType";
+import Swal from "sweetalert2";
 
 
 export const login = (data) => {
@@ -15,6 +16,21 @@ export const login = (data) => {
       // console.log(res.data);
       localStorage.setItem("AuthData", JSON.stringify(res.data));
       sessionStorage.setItem("token", res.data.token);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
 
     } catch (error) {
       dispatch({ type: LOGIN_FAILURE });

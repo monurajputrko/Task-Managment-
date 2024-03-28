@@ -12,7 +12,7 @@ import {
   UPDATE_TODO_REQUEST,
   UPDATE_TODO_SUCCESS,
 } from "./actionTypes";
-
+import Swal from "sweetalert2";
 export const getTodoRequest = () => {
   return { type: GET_TODO_REQUEST };
 };
@@ -77,8 +77,13 @@ export const postTodo = (newTodo) => {
           },
         }
       );
-      await dispatch(postTodoSuccess(resp.data));
-      await dispatch(getDataTodos()); 
+      //  dispatch(postTodoSuccess(resp.data));
+      await dispatch(getDataTodos());  
+      Swal.fire({
+        title: "Great",
+        text: "Task Added Successfully",
+        icon: "success",
+      });
     } catch (error) {
       dispatch(postTodoFailure());
     }
@@ -136,6 +141,11 @@ export const deleteTodo = (id) => {
         },
       });
       await dispatch(getDataTodos()); // Fetch todos after deleting a todo
+      Swal.fire({
+        title: "Great",
+        text: "Task Deleted Successfully",
+        icon: "success",
+      });
     } catch (error) {
       console.log(error);
     }

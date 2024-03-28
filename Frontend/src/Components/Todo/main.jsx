@@ -35,7 +35,7 @@ export default function Main() {
   const dispatch = useDispatch();
   const mdata = useSelector((store) => store) || [];
   const tasks = mdata?.todosReducer?.todos?.todolist || [];
-
+  console.log(mdata.todosReducer)
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "mantine-color-scheme",
     defaultValue: "light",
