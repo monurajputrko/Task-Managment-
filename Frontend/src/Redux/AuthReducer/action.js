@@ -44,6 +44,8 @@ export const signup = (data) => {
 export const logout = () => {
   return async (dispatch) => {
     try {
+      sessionStorage.removeItem("token");
+      localStorage.removeItem("AuthData");
       dispatch({ type: LOGIN_FAILURE, isAuth: false });
     } catch (error) {
       console.log(error);
